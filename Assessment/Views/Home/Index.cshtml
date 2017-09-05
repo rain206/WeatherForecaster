@@ -1,0 +1,63 @@
+﻿@{
+	ViewData["Title"] = "SkyCast";
+}
+
+<div id="main" style="width: 100%; margin-top: 1%">
+	<!--<div id="map" style="height: 600px"></div>
+	<span style="width: 5.5%">Location: </span>-->
+	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter your location" />
+	<button type="button" onclick="getWeather()">Get Weather</button>
+	<div class="row">
+		<h2 id="weather-location" class="text-center">---</h2>
+	</div>
+	<div class="row">
+		<h2 id="weather-current" class="text-center">--</h2>
+	</div>
+	<div class="row">
+		<h2 id="weather-high" class="text-center">High: --</h2>
+	</div>
+	<div class="row">
+		<h2 id="weather-low" class="text-center">Low: --</h2>
+	</div>
+	<div class="row">
+		<h2 id="summary" class="text-center">Summary: --</h2>
+	</div>
+</div>
+
+<div id="forecast" style="width: 100%; margin-top: 1%" hidden>
+	<div class="col-md-6" id="left" style="text-align: center">
+		<div class="row">
+			<span id="day1" style="margin-right: 1%"></span>
+			<span id="day1-high" class="text-center">High: --</span>
+			<span id="day1-low" class="text-center">Low: --</span>
+		</div>
+		<div class="row">
+			<span id="day2" style="margin-right: 1%"></span>
+			<span id="day2-high" class="text-center">High: --</span>
+			<span id="day2-low" class="text-center">Low: --</span>
+		</div>
+		<div class="row">
+			<span id="day3" style="margin-right: 1%"></span>
+			<span id="day3-high" class="text-center">High: --</span>
+			<span id="day3-low" class="text-center">Low: --</span>
+		</div>
+		<div class="row">
+			<span id="day4" style="margin-right: 1%"></span>
+			<span id="day4-high" class="text-center">High: --</span>
+			<span id="day4-low" class="text-center">Low: --</span>
+		</div>
+		<div class="row">
+			<span id="day5" style="margin-right: 1%"></span>
+			<span id="day5-high" class="text-center">High: --</span>
+			<span id="day5-low" class="text-center">Low: --</span>
+		</div>
+		<div class="row">
+			<span id="day6" style="margin-right: 1%"></span>
+			<span id="day6-high" class="text-center">High: --</span>
+			<span id="day6-low" class="text-center">Low: --</span>
+		</div>
+	</div>
+	<div class="col-md-6" id="right">
+		<div id="graph"></div>
+	</div>
+</div>
