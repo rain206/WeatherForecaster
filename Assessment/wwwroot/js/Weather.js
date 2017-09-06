@@ -1,6 +1,4 @@
-﻿var data = "Data, Temperature\n";
-var autocomplete;
-var counter = 4;
+﻿var autocomplete;
 var place;
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -67,22 +65,27 @@ function getForecast(latLon) {
 }
 
 function historicalGraph(url) {
-	data = "Data, Temperature\n";
-	counter = 0;
-	for (var i = 0; i < 5; i--)
-	{
-		getData(url, i);
-	}
-
-	g = new Dygraph(document.getElementById("graph"), data);
+    var xAxis = [];
+    var yAxis = [];
+    getData(url, 4, xAxis, yAxis);
 }
 
-function getData(url, i) {
+function getData(url, i, xAxis, yAxis) {
+    if (i < 0) {
+        var data = [
+            {
+                x: xAxis,
+                y: yAxis,
+                type: 'bar'
+            }
+        ]
+        Plotly.newPlot('graph', data);
+        return;
+    }
+
 	var date = new Date();
 	var history = new Date(date.setFullYear(date.getFullYear() - i));
 	var query = url.concat("," + Math.round(history.getTime() / 1000));
-
-	alert(query);
 
 	$.ajax({
 		format: "jsonp",
@@ -90,10 +93,11 @@ function getData(url, i) {
 		url: query,
 		success: function (json) {
 			var record = new Date(1970, 0, 1);
-			record.setSeconds(json.daily.data[0].time);
-			data = data.concat(record.getFullYear() + "-" + record.getMonth() + "-" + record.getDate() + "," + Math.round(json.daily.data[0].temperatureMax) + "\n");
-			alert("DONE: " + i);
-			counter = counter + 1;
+            record.setSeconds(json.daily.data[0].time);
+            xAxis.push(record.getFullYear());
+            yAxis.push(Math.round(json.daily.data[0].temperatureMax));
+            //data = data.concat(record.getFullYear() + "," + Math.round(json.daily.data[0].temperatureMax) + "\n"); 
+            getData(url, i - 1, xAxis, yAxis);
 		}
 	})
 	.error(function (jqXHR, textStatus, errorThrown) {

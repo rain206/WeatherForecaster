@@ -57,3 +57,5 @@ textarea {
 input {
 	max-width: 100%;
 }
+
+.dygraph-legend {text-align: right;}
