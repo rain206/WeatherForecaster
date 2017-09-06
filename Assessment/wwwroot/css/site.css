@@ -1,6 +1,7 @@
 ﻿body {
 	padding-top: 50px;
 	padding-bottom: 20px;
+	background-color: rgb(7, 192, 251);
 }
 
 /* Wrapping element */
@@ -58,4 +59,14 @@ input {
 	max-width: 100%;
 }
 
-.dygraph-legend {text-align: right;}
+.dygraph-legend { text-align: right; }
+
+#info {
+	background-color: rgba(246, 249, 250, 0.3);
+	height: 550px;
+}
+
+#forecast {
+	background-color: rgba(246, 249, 250, 0.3);
+	height: 110px;
+}
