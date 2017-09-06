@@ -179,3 +179,8 @@ function renderGraph(xAxis, yAxis)
     Plotly.newPlot('graph', data, layout);
     return;
 }
+
+function storeQuery(query, userId)
+{
+
+}

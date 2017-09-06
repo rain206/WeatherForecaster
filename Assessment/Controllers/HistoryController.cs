@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assessment.Models;
 using Assessment.Models.AccountViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Assessment.Controllers
 {
@@ -24,6 +25,7 @@ namespace Assessment.Controllers
 		/// </summary>
 		/// <param name="userId"></param>
 		/// <returns></returns>
+		[Authorize]
         public async Task<IActionResult> Index(int userId)
         {
 
@@ -42,13 +44,14 @@ namespace Assessment.Controllers
 		/// Adds a new Query to the database
 		/// </summary>
 		/// <param name="model"></param>
-		public async void CreateQuery ([Bind("ID,Query,UserId")] QueryViewModel model)
+		[Authorize]
+		public async void CreateQuery (string query, int userId)
 		{
-			if (ModelState.IsValid)
-			{
-				_context.Add(model);
-				await _context.SaveChangesAsync();
-			}
+			var model = new QueryViewModel();
+			model.Query = query;
+			model.UserId = userId;
+			_context.Add(model);
+			await _context.SaveChangesAsync();
 		}
 
 

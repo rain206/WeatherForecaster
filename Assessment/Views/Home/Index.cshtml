@@ -6,7 +6,7 @@
 	<!--<div id="map" style="height: 600px"></div>
 	<span style="width: 5.5%">Location: </span>-->
 	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter your location" />
-	<button type="button" onclick="getWeather()">Get Weather</button>
+	<button type="button" onclick="queryWeather()">Get Weather</button>
 	<div class="row">
 		<h2 id="weather-location" class="text-center">---</h2>
 	</div>
@@ -70,4 +70,14 @@
 	<script src="~/js/Weather.js" asp-append-version="true"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1tYuyKiugDJH6OJ9W69kILJRPQdj_CrE&sensor=false&callback=initMap&libraries=places&weather"
 			async defer></script>
+
+	<script type="text/javascript">
+		function queryWeather() {
+			if (@User.Identity.IsAuthenticated.ToString().ToLower())
+			{
+			}
+			getWeather();
+
+		}
+	</script>
 }
