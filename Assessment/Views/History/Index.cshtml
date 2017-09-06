@@ -1,0 +1,16 @@
+﻿@model Assessment.Models.History
+
+<h1 style="text-align: center">User Search History</h1>
+
+<table class="table">
+	<tbody>
+		@foreach(var query in Model.QueryList)
+		{
+			<tr>
+				<td>
+					@query
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
