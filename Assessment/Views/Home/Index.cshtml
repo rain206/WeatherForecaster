@@ -10,54 +10,65 @@
 	<div class="row">
 		<h2 id="weather-location" class="text-center">---</h2>
 	</div>
-	<div class="row">
-		<h2 id="weather-current" class="text-center">--</h2>
-	</div>
-	<div class="row">
-		<h2 id="weather-high" class="text-center">High: --</h2>
-	</div>
-	<div class="row">
-		<h2 id="weather-low" class="text-center">Low: --</h2>
-	</div>
-	<div class="row">
-		<h2 id="summary" class="text-center">Summary: --</h2>
-	</div>
+
+    <div class="row" id="info" hidden>
+        <div class="col-md-6">
+            <div id="graph"></div>
+        </div>
+        <div class="col-md-3" style="margin-top: 7%">
+            <div class="row">
+                <h2 id="summary" class="text-center">Summary: --</h2>
+            </div>
+            <div class="row">
+                <h2 id="weather-high" class="text-center">High: --</h2>
+            </div>
+            <div class="row">
+                <h2 id="weather-low" class="text-center">Low: --</h2>
+            </div>
+        </div>
+        <div class="col-md-3" style="margin-top: 13%; text-align: center">
+            <p id="weather-current" class="text-center" style="font-size: 92px">--</p>
+        </div>
+    </div>
 </div>
 
-<div id="forecast" style="width: 100%; margin-top: 1%" hidden>
-	<div class="col-md-6" id="left" style="text-align: center">
-		<div class="row">
-			<span id="day1" style="margin-right: 1%"></span>
-			<span id="day1-high" class="text-center">High: --</span>
-			<span id="day1-low" class="text-center">Low: --</span>
-		</div>
-		<div class="row">
-			<span id="day2" style="margin-right: 1%"></span>
-			<span id="day2-high" class="text-center">High: --</span>
-			<span id="day2-low" class="text-center">Low: --</span>
-		</div>
-		<div class="row">
-			<span id="day3" style="margin-right: 1%"></span>
-			<span id="day3-high" class="text-center">High: --</span>
-			<span id="day3-low" class="text-center">Low: --</span>
-		</div>
-		<div class="row">
-			<span id="day4" style="margin-right: 1%"></span>
-			<span id="day4-high" class="text-center">High: --</span>
-			<span id="day4-low" class="text-center">Low: --</span>
-		</div>
-		<div class="row">
-			<span id="day5" style="margin-right: 1%"></span>
-			<span id="day5-high" class="text-center">High: --</span>
-			<span id="day5-low" class="text-center">Low: --</span>
-		</div>
-		<div class="row">
-			<span id="day6" style="margin-right: 1%"></span>
-			<span id="day6-high" class="text-center">High: --</span>
-			<span id="day6-low" class="text-center">Low: --</span>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div id="graph"></div>
-	</div>
+
+<div id="forecast" style="width: 100%; margin-top: 3%" hidden>
 </div>
+
+    <!--
+    <div id="forecast" style="width: 100%; margin-top: 3%" hidden>
+        <div class="col-md-6" id="left" style="text-align: center">
+            <div class="row">
+                <span id="day1" style="margin-right: 1%"></span>
+                <span id="day1-high" class="text-center">High: --</span>
+                <span id="day1-low" class="text-center">Low: --</span>
+            </div>
+            <div class="row">
+                <span id="day2" style="margin-right: 1%"></span>
+                <span id="day2-high" class="text-center">High: --</span>
+                <span id="day2-low" class="text-center">Low: --</span>
+            </div>
+            <div class="row">
+                <span id="day3" style="margin-right: 1%"></span>
+                <span id="day3-high" class="text-center">High: --</span>
+                <span id="day3-low" class="text-center">Low: --</span>
+            </div>
+            <div class="row">
+                <span id="day4" style="margin-right: 1%"></span>
+                <span id="day4-high" class="text-center">High: --</span>
+                <span id="day4-low" class="text-center">Low: --</span>
+            </div>
+            <div class="row">
+                <span id="day5" style="margin-right: 1%"></span>
+                <span id="day5-high" class="text-center">High: --</span>
+                <span id="day5-low" class="text-center">Low: --</span>
+            </div>
+            <div class="row">
+                <span id="day6" style="margin-right: 1%"></span>
+                <span id="day6-high" class="text-center">High: --</span>
+                <span id="day6-low" class="text-center">Low: --</span>
+            </div>
+        </div>
+    </div>
+    -->

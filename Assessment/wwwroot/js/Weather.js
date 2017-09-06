@@ -55,7 +55,8 @@ function getForecast(latLon) {
 				$("#day" + i + "-high").html("High: " + Math.round(json.daily.data[i].temperatureMax))
 				$("#day" + i + "-low").html("Low: " + Math.round(json.daily.data[i].temperatureMin));
 			}
-			historicalGraph(url);
+            historicalGraph(url);
+            $("#info").show(1000);
 			$("#forecast").show(1000);
 		}
 	})
@@ -72,14 +73,7 @@ function historicalGraph(url) {
 
 function getData(url, i, xAxis, yAxis) {
     if (i < 0) {
-        var data = [
-            {
-                x: xAxis,
-                y: yAxis,
-                type: 'bar'
-            }
-        ]
-        Plotly.newPlot('graph', data);
+        renderGraph(xAxis, yAxis);
         return;
     }
 
@@ -104,4 +98,27 @@ function getData(url, i, xAxis, yAxis) {
 		counter = counter + 1;
 		alert("Error retrieving forecast. Please reenter your location");
 	})
+}
+
+function renderGraph(xAxis, yAxis)
+{
+    var data = [
+        {
+            x: xAxis,
+            y: yAxis,
+            type: 'bar'
+        }
+    ]
+
+    var layout = {
+        title: 'Historical Temperatures On This Day',
+        xaxis: {
+            title: 'Year',
+        },
+        yaxis: {
+            title: 'Degrees (F)'
+        }
+    };
+    Plotly.newPlot('graph', data, layout);
+    return;
 }
