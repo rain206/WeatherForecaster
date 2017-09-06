@@ -62,42 +62,12 @@
 		<p id="day6"></p>
 		<p id="day6-high">High: --</p>
 		<p id="day6-low">Low: --</p>
-	</div>
+	</div>s
 </div>
 
-    <!--
-    <div id="forecast" style="width: 100%; margin-top: 3%" hidden>
-        <div class="col-md-6" id="left" style="text-align: center">
-            <div class="row">
-                <span id="day1" style="margin-right: 1%"></span>
-                <span id="day1-high" class="text-center">High: --</span>
-                <span id="day1-low" class="text-center">Low: --</span>
-            </div>
-            <div class="row">
-                <span id="day2" style="margin-right: 1%"></span>
-                <span id="day2-high" class="text-center">High: --</span>
-                <span id="day2-low" class="text-center">Low: --</span>
-            </div>
-            <div class="row">
-                <span id="day3" style="margin-right: 1%"></span>
-                <span id="day3-high" class="text-center">High: --</span>
-                <span id="day3-low" class="text-center">Low: --</span>
-            </div>
-            <div class="row">
-                <span id="day4" style="margin-right: 1%"></span>
-                <span id="day4-high" class="text-center">High: --</span>
-                <span id="day4-low" class="text-center">Low: --</span>
-            </div>
-            <div class="row">
-                <span id="day5" style="margin-right: 1%"></span>
-                <span id="day5-high" class="text-center">High: --</span>
-                <span id="day5-low" class="text-center">Low: --</span>
-            </div>
-            <div class="row">
-                <span id="day6" style="margin-right: 1%"></span>
-                <span id="day6-high" class="text-center">High: --</span>
-                <span id="day6-low" class="text-center">Low: --</span>
-            </div>
-        </div>
-    </div>
-    -->
+@section Scripts {
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="~/js/Weather.js" asp-append-version="true"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1tYuyKiugDJH6OJ9W69kILJRPQdj_CrE&sensor=false&callback=initMap&libraries=places&weather"
+			async defer></script>
+}

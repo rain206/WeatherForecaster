@@ -57,7 +57,7 @@ function getCity(latLon) {
 }
 
 function getForecast(latLon) {
-	var url = "https://api.darksky.net/forecast/f6490d4ee8ea6131360e34e7570255d1/" + latLon;
+	var url = "https://api.darksky.net/forecast/25da0162a3bbb222ed3f144eaabade8d/" + latLon;
 	$.ajax({
 		format: "jsonp",
 		dataType: "jsonp",
