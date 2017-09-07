@@ -70,7 +70,7 @@ function getForecast(latLon) {
 			$("#weather-low").html("Low: " + Math.round(json.daily.data[0].temperatureMin) + "°");
 			$("#summary").html(json.daily.data[0].summary);
 
-			for (var i = 1; i <= 6; i++)
+			for (var i = 1; i <= 6 && json.daily.data.length; i++)
 			{
 				var date = new Date();
 				var newDate = new Date(date.setTime(date.getTime() + (i * 86400000)));
@@ -144,12 +144,10 @@ function getData(url, i, xAxis, yAxis) {
             record.setSeconds(json.daily.data[0].time);
             xAxis.push(record.getFullYear());
             yAxis.push(Math.round(json.daily.data[0].temperatureMax));
-            //data = data.concat(record.getFullYear() + "," + Math.round(json.daily.data[0].temperatureMax) + "\n"); 
             getData(url, i - 1, xAxis, yAxis);
 		}
 	})
 	.error(function (jqXHR, textStatus, errorThrown) {
-		counter = counter + 1;
 		alert("Error retrieving forecast. Please reenter your location");
 	})
 }
