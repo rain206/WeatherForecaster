@@ -1,4 +1,4 @@
-﻿var autocomplete;
+﻿var searchBox;
 var place;
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var city;
@@ -23,23 +23,32 @@ function getLocation() {
 	});
 }
 
+
 function initMap() {
-	var acOptions = {
-		types: ['establishment']
-	};
+	searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'));
 
-	autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), acOptions);
+	// Listen for the event fired when the user selects a prediction and retrieve
+	// more details for that place.
+	searchBox.addListener('places_changed', function () {
+		var places = searchBox.getPlaces();
 
-	google.maps.event.addListener(autocomplete, 'place_changed', function () {
-		place = autocomplete.getPlace();
+		if (places.length == 0) {
+			return;
+		}
 	});
 }
 
 function getWeather() {
-	var loc = autocomplete.getPlace();
-	var latLon = loc.geometry.location.lat() + "," + loc.geometry.location.lng();
-	getCity(latLon);
-	getForecast(latLon);
+	if (searchBox.getPlaces())
+	{
+		var loc = searchBox.getPlaces().pop();
+		var latLon = loc.geometry.location.lat() + "," + loc.geometry.location.lng();
+		getCity(latLon);
+		getForecast(latLon);
+	}
+	else {
+		alert("Could not retrieve location. Please enter a new location");
+	}
 }
 
 function getCity(latLon) {
@@ -53,7 +62,10 @@ function getCity(latLon) {
 			city = data.results[0].address_components[3].long_name
 		},
 		method: "GET"
-	});
+	})
+	.error(function (jqXHR, textStatus, errorThrown) {
+		alert("Could not retrieve city. Please enter a new location");
+	})
 }
 
 function getForecast(latLon) {

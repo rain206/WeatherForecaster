@@ -1,0 +1,26 @@
+﻿@model Assessment.Models.History
+@{
+    ViewData["Title"] = "Search History";
+}
+
+<h1 style="text-align: center">Search History</h1>
+
+<table class="table">
+    <tr>
+        <th><b>Search Query</b></th>
+        <th><b>Date</b></th>
+    </tr>
+	<tbody>
+		@foreach(var query in Model.QueryList)
+		{
+			<tr>
+				<td>
+				    @query.Query
+				</td>
+                <td>
+                    @query.Date
+                </td>
+			</tr>
+		}
+	</tbody>
+</table>

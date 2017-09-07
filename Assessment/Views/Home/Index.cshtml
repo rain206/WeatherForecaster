@@ -1,6 +1,9 @@
 ﻿@{
 	ViewData["Title"] = "SkyCast";
 }
+@inject UserManager<ApplicationUser> UserManager
+
+<div id="map" hidden></div>
 
 <div id="main" style="width: 100%; margin-top: 1%">
 	<!--<div id="map" style="height: 600px"></div>
@@ -80,7 +83,7 @@
                     type: 'POST',
                     cache: false,
                     url: '@Url.Action("CreateQuery", "History")',
-                    data: { query: query, id: UserManager.GetUserId(User) },
+                    data: { query: query, id: '@UserManager.GetUserId(User)' },
                     success: function (response) {
                         getWeather();
                     }

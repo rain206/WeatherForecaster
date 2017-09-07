@@ -26,13 +26,13 @@ namespace Assessment.Controllers
 		/// <param name="id"></param>
 		/// <returns></returns>
 		[Authorize]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> SearchHistory(int id)
         {
 
 			//Gets a list of Query IDs
 			var userHistory = from h in _context.Queries
 							  where h.UserId == id
-							  select h.Query;
+							  select h;
 
 			var model = new History();
 			model.QueryList = await userHistory.ToListAsync();
@@ -51,6 +51,7 @@ namespace Assessment.Controllers
 			var model = new QueryViewModel();
 			model.Query = query;
 			model.UserId = id;
+            model.Date = DateTime.Now;
 			_context.Add(model);
 			await _context.SaveChangesAsync();
 		}

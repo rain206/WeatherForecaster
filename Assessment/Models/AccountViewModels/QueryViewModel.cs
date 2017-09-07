@@ -21,5 +21,10 @@ namespace Assessment.Models.AccountViewModels
 		/// The ID of the user that made the Query
 		/// </summary>
 		public int UserId { get; set; }
+
+        /// <summary>
+        /// Date the query was made
+        /// </summary>
+        public DateTime Date { get; set; }
     }
 }

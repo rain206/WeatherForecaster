@@ -2,5 +2,6 @@
     [Id]     INT            IDENTITY (1125, 3) NOT NULL,
     [Query]  NVARCHAR (256) NOT NULL,
     [UserId] INT            NOT NULL,
+	[Date] DATETIME NOT NULL DEFAULT getutcdate(),
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
