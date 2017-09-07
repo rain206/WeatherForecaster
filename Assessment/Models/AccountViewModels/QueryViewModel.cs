@@ -20,7 +20,7 @@ namespace Assessment.Models.AccountViewModels
 		/// <summary>
 		/// The ID of the user that made the Query
 		/// </summary>
-		public int UserId { get; set; }
+		public string UserId { get; set; }
 
         /// <summary>
         /// Date the query was made

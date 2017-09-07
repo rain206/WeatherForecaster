@@ -26,7 +26,7 @@ namespace Assessment.Controllers
 		/// <param name="id"></param>
 		/// <returns></returns>
 		[Authorize]
-        public async Task<IActionResult> SearchHistory(int id)
+        public async Task<IActionResult> SearchHistory(string id)
         {
 
 			//Gets a list of Query IDs
@@ -46,7 +46,7 @@ namespace Assessment.Controllers
         /// <param name="model"></param>
         [HttpPost]
         [Authorize]
-        public async Task CreateQuery(string query, int id)
+        public async Task CreateQuery(string query, string id)
 		{
 			var model = new QueryViewModel();
 			model.Query = query;

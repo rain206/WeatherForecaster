@@ -39,7 +39,7 @@ function initMap() {
 }
 
 function getWeather() {
-	if (searchBox.getPlaces())
+	if (searchBox.getPlaces().length > 0)
 	{
 		var loc = searchBox.getPlaces().pop();
 		var latLon = loc.geometry.location.lat() + "," + loc.geometry.location.lng();
@@ -69,7 +69,7 @@ function getCity(latLon) {
 }
 
 function getForecast(latLon) {
-	var url = "https://api.darksky.net/forecast/25da0162a3bbb222ed3f144eaabade8d/" + latLon;
+	var url = "https://api.darksky.net/forecast/f6490d4ee8ea6131360e34e7570255d1/" + latLon;
 	$.ajax({
 		format: "jsonp",
 		dataType: "jsonp",
