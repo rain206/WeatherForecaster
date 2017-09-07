@@ -1,5 +1,4 @@
 ﻿var searchBox;
-var place;
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var city;
 var changed = 0;
@@ -45,6 +44,7 @@ function getWeather() {
 		var latLon = loc.geometry.location.lat() + "," + loc.geometry.location.lng();
 		getCity(latLon);
 		getForecast(latLon);
+		validAddress = false;
 	}
 	else {
 		alert("Could not retrieve location. Please enter a new location");

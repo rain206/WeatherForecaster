@@ -36,6 +36,7 @@ namespace Assessment.Controllers
 
 			var model = new History();
 			model.QueryList = await userHistory.ToListAsync();
+            model.QueryList.Reverse();
 
             return View(model);
         }
