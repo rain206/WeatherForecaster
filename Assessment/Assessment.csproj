@@ -10,11 +10,11 @@
 
   <PropertyGroup>
     <UserSecretsId>aspnet-Assessment-6c5948bb-cda7-4bb9-926c-d724a61eb0c4</UserSecretsId>
+    <UserSecretsId>darksky-key-6c5648fb-cza4-4ub9-986c-dz24a61eb0c4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="wwwroot\font\weathericons-regular-webfont.eot" />
-    <Content Include="wwwroot\js\Dygraph.js" />
     <Content Include="wwwroot\js\Weather.js" />
   </ItemGroup>
   <ItemGroup>

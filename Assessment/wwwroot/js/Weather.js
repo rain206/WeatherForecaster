@@ -61,7 +61,7 @@ function getCity(latLon) {
 		dataType: "json",
 		url: url,
 		success: function (data) {
-			city = data.results[0].address_components[3].long_name
+			city = data.results[0].address_components[3].short_name;
 		},
 		method: "GET"
 	})
