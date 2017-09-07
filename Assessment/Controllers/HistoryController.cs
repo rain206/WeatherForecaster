@@ -23,21 +23,19 @@ namespace Assessment.Controllers
 		/// <summary>
 		/// Gets the user's search History
 		/// </summary>
-		/// <param name="userId"></param>
+		/// <param name="id"></param>
 		/// <returns></returns>
 		[Authorize]
-        public async Task<IActionResult> Index(string userId)
+        public async Task<IActionResult> Index(int id)
         {
 
 			//Gets a list of Query IDs
 			var userHistory = from h in _context.Queries
-							  where h.UserId == userId
+							  where h.UserId == id
 							  select h.Query;
 
 			var model = new History();
 			model.QueryList = await userHistory.ToListAsync();
-
-            System.Diagnostics.Debug.WriteLine("Size: " + model.QueryList.Count);
 
             return View(model);
         }
@@ -48,11 +46,11 @@ namespace Assessment.Controllers
         /// <param name="model"></param>
         [HttpPost]
         [Authorize]
-        public async Task CreateQuery(string query, string userId)
+        public async Task CreateQuery(string query, int id)
 		{
 			var model = new QueryViewModel();
 			model.Query = query;
-			model.UserId = userId;
+			model.UserId = id;
 			_context.Add(model);
 			await _context.SaveChangesAsync();
 		}

@@ -9,7 +9,7 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-				@Html.ActionLink("Search History", "Index", "History", new { userId = User.Identity.Name })
+				@Html.ActionLink("Search History", "Index", "History", new { id = UserManager.GetUserId(User) })
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>

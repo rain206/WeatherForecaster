@@ -18,8 +18,8 @@ namespace Assessment.Models.AccountViewModels
 		public string Query { get; set; }
 
 		/// <summary>
-		/// The ID (email) of the user that made the Query
+		/// The ID of the user that made the Query
 		/// </summary>
-		public string UserId { get; set; }
+		public int UserId { get; set; }
     }
 }
