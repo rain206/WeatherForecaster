@@ -2,6 +2,7 @@
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var city;
 var changed = 0;
+var newQuery = false;
 
 $(document.ready).ready(function () {
 	getLocation();
@@ -34,6 +35,7 @@ function initMap() {
 		if (places.length == 0) {
 			return;
 		}
+		newQuery = true;
 	});
 }
 
@@ -44,11 +46,11 @@ function getWeather() {
 		var latLon = loc.geometry.location.lat() + "," + loc.geometry.location.lng();
 		getCity(latLon);
 		getForecast(latLon);
-		validAddress = false;
 	}
 	else {
 		alert("Could not retrieve location. Please enter a new location");
 	}
+	newQuery = false;
 }
 
 function getCity(latLon) {

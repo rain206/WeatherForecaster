@@ -8,8 +8,8 @@
 <div id="main" style="width: 100%; margin-top: 1%">
 	<!--<div id="map" style="height: 600px"></div>
 	<span style="width: 5.5%">Location: </span>-->
-	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter your location" />
-	<button type="button" onclick="queryWeather()">Get Weather</button>
+	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter a location" />
+	<button type="button" class="btn btn-default" onclick="queryWeather()">Get Weather</button>
 	<div class="row">
 		<h2 id="weather-location" class="text-center"></h2>
 	</div>
@@ -76,6 +76,12 @@
 
 	<script type="text/javascript">
         function queryWeather() {
+
+            if (!newQuery) {
+                alert("Help me reduce the api call count by not spamming the Get Weather button =)");
+                return;
+            }
+
 			if (@User.Identity.IsAuthenticated.ToString().ToLower())
             {
                 var query = $("#autocomplete").val();
