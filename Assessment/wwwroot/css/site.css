@@ -1,7 +1,7 @@
 ﻿body {
 	padding-top: 50px;
 	padding-bottom: 20px;
-	background-color: rgb(7, 192, 251);
+	background-color: rgb(250, 252, 255)
 }
 
 /* Wrapping element */
@@ -62,11 +62,20 @@ input {
 .dygraph-legend { text-align: right; }
 
 #info {
-	background-color: rgba(246, 249, 250, 0.3);
+	background-color: rgba(152, 163, 178, 0.3);
 	height: 550px;
 }
 
 #forecast {
-	background-color: rgba(246, 249, 250, 0.3);
-	height: 110px;
+    background-color: rgba(152, 163, 178, 0.3);
+    height: 110px;
+}
+
+#weather-location {
+    color: rgb(255, 198, 13);
+    text-transform: uppercase;
+}
+
+#weather-current {
+    color: rgb(21, 25, 31);
 }

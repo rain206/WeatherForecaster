@@ -8,7 +8,7 @@
 	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter your location" />
 	<button type="button" onclick="queryWeather()">Get Weather</button>
 	<div class="row">
-		<h2 id="weather-location" class="text-center">---</h2>
+		<h2 id="weather-location" class="text-center"></h2>
 	</div>
 </div>
 
@@ -72,12 +72,27 @@
 			async defer></script>
 
 	<script type="text/javascript">
-		function queryWeather() {
+        function queryWeather() {
 			if (@User.Identity.IsAuthenticated.ToString().ToLower())
-			{
-			}
-			getWeather();
-
+            {
+                var query = $("#autocomplete").val();
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: '@Url.Action("CreateQuery", "History")',
+                    data: { query: query, userId: '@User.Identity.Name' },
+                    success: function (response) {
+                        getWeather();
+                    }
+                })
+                .error(function (jqXHR, textStatus, errorThrown) {
+                    alert("Server error. Please try again later.");
+                })
+            }
+            else
+            {
+                getWeather();
+            }
 		}
 	</script>
 }

@@ -64,7 +64,7 @@ function getForecast(latLon) {
 		url: url,
 		success: function (json) {
 			var day = new Date();
-			$("#weather-location").html(days[day.getDay()] + " in " + city);
+			$("#weather-location").html('<b>' + days[day.getDay()] + ' in ' + city + '</b>');
 			$("#weather-current").html(Math.round(json.currently.temperature) + "°");
 			$("#weather-high").html("High: " + Math.round(json.daily.data[0].temperatureMax) + "°");
 			$("#weather-low").html("Low: " + Math.round(json.daily.data[0].temperatureMin) + "°");
@@ -160,7 +160,7 @@ function renderGraph(xAxis, yAxis)
         {
             x: xAxis,
 			y: yAxis,
-			//marker: {color: 'rgb(0, 0, 0)'},
+			marker: {color: 'rgb(255, 212, 69)'},
             type: 'bar'
         }
     ]

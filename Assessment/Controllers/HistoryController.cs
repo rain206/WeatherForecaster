@@ -26,26 +26,29 @@ namespace Assessment.Controllers
 		/// <param name="userId"></param>
 		/// <returns></returns>
 		[Authorize]
-        public async Task<IActionResult> Index(int userId)
+        public async Task<IActionResult> Index(string userId)
         {
 
 			//Gets a list of Query IDs
 			var userHistory = from h in _context.Queries
-							  where h.Id == userId
+							  where h.UserId == userId
 							  select h.Query;
 
 			var model = new History();
 			model.QueryList = await userHistory.ToListAsync();
 
+            System.Diagnostics.Debug.WriteLine("Size: " + model.QueryList.Count);
+
             return View(model);
         }
 
-		/// <summary>
-		/// Adds a new Query to the database
-		/// </summary>
-		/// <param name="model"></param>
-		[Authorize]
-		public async void CreateQuery (string query, int userId)
+        /// <summary>
+        /// Adds a new Query to the database
+        /// </summary>
+        /// <param name="model"></param>
+        [HttpPost]
+        [Authorize]
+        public async Task CreateQuery(string query, string userId)
 		{
 			var model = new QueryViewModel();
 			model.Query = query;
@@ -53,7 +56,6 @@ namespace Assessment.Controllers
 			_context.Add(model);
 			await _context.SaveChangesAsync();
 		}
-
 
         private bool HistoryViewModelExists(int id)
         {
