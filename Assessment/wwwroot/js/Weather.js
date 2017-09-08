@@ -6,6 +6,7 @@ $(document.ready).ready(function () {
 	getLocation();
 })
 
+
 //Gets the location of the user based on their IP address. 
 function getLocation() {
 	var location;
@@ -45,7 +46,7 @@ function getCity(latLon) {
 		dataType: "json",
 		url: url,
 		success: function (data) {
-			city = data.results[0].address_components[3].short_name;
+			city = data.results[0].address_components[3].long_name;
 		},
 		method: "GET"
 	})
