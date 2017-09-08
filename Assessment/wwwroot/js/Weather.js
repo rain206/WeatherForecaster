@@ -1,5 +1,6 @@
-﻿var searchBox, city, changed = 0, newQuery = false;
+﻿var searchBox, city, changed = 0, newQuery = false, darkSky, darkSkyUrl;
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+var historicalData = [];
 
 $(document.ready).ready(function () {
 	getLocation();
@@ -72,20 +73,22 @@ function getCity(latLon) {
 
 //Gets the forecast for the location and changes the HTML accordingly.
 function getForecast(latLon) {
-	var url = "https://api.darksky.net/forecast/f6490d4ee8ea6131360e34e7570255d1/" + latLon;
+	darkSkyUrl = "https://api.darksky.net/forecast/f6490d4ee8ea6131360e34e7570255d1/" + latLon;
 	$.ajax({
 		format: "jsonp",
 		dataType: "jsonp",
-		url: url,
+		url: darkSkyUrl,
 		success: function (json) {
+			darkSky = json;
 			var day = new Date();
 			$("#weather-location").html('<b>' + days[day.getDay()] + ' in ' + city + '</b>');
 			$("#weather-current").html(Math.round(json.currently.temperature) + "°");
 			$("#weather-high").html("High: " + Math.round(json.daily.data[0].temperatureMax) + "°");
 			$("#weather-low").html("Low: " + Math.round(json.daily.data[0].temperatureMin) + "°");
 			$("#summary").html(json.daily.data[0].summary);
+			$("#iconToday").replaceWith(getWeatherIcon(json.daily.data[0].icon).replace("2x", "5x"));
 
-			for (var i = 1; i <= 6 && json.daily.data.length; i++)
+			for (var i = 1; i < 7 && json.daily.data.length; i++)
 			{
 				var date = new Date();
 				var newDate = new Date(date.setTime(date.getTime() + (i * 86400000)));
@@ -103,7 +106,7 @@ function getForecast(latLon) {
 				$("#day" + i + "-low").html("Low: " + Math.round(json.daily.data[i].temperatureMin));
 			}
 			changed = 1;
-            historicalGraph(url);
+			getPastData(darkSkyUrl, 4)
             $("#info").show(1000);
 			$("#forecast").show(1000);
 		}
@@ -135,22 +138,14 @@ function getWeatherIcon(icon)
 	return '<i class="fa fa-sun-o fa-2x" aria-hidden="true"></i>'
 }
 
-//Initializes the variables for the graph.
-function historicalGraph(url) {
-    var xAxis = [];
-    var yAxis = [];
-    getData(url, 4, xAxis, yAxis);
-}
-
 //Recursively makes ajax calls to the DarkSky API to gather weather information for the past 5 years from today
-function getData(url, i, xAxis, yAxis) {
-    if (i < 0) {
-        renderGraph(xAxis, yAxis);
+function getPastData(url, yearsBack) {
+    if (yearsBack < 0) {
+        renderGraph(0);
         return;
     }
-
 	var date = new Date();
-	var history = new Date(date.setFullYear(date.getFullYear() - i));
+	var history = new Date(date.setFullYear(date.getFullYear() - yearsBack - 1));
 	var query = url.concat("," + Math.round(history.getTime() / 1000));
 
 	$.ajax({
@@ -158,21 +153,61 @@ function getData(url, i, xAxis, yAxis) {
 		dataType: "jsonp",
 		url: query,
 		success: function (json) {
+			historicalData.push(json);
+
+			/*
 			var record = new Date(1970, 0, 1);
-            record.setSeconds(json.daily.data[0].time);
-            xAxis.push(record.getFullYear());
-            yAxis.push(Math.round(json.daily.data[0].temperatureMax));
-            getData(url, i - 1, xAxis, yAxis);
+			record.setSeconds(json.daily.data[0].time);
+
+			xAxis.push(record.getFullYear());
+
+			switch (hash)
+			{
+				case 0: yAxis.push(Math.round(json.daily.data[0].temperatureMax));
+						break;
+				case 1: yAxis.push(Math.round(json.daily.data[0].temperatureMin));
+						break;
+				case 2: yAxis.push(Math.round(json.daily.data[0].windSpeed));
+						break;
+				case 3: yAxis.push(json.daily.data[0].precipIntensity);
+						break;
+				default: break;
+			}
+			*/
+
+            getPastData(url, yearsBack - 1);
 		}
 	})
 	.error(function (jqXHR, textStatus, errorThrown) {
-		alert("Error retrieving forecast. Please reenter your location");
+		alert("Error retrieving forecast. Please try again");
 	})
 }
 
 //Renders a bar graph onto the DOM using Plotly
-function renderGraph(xAxis, yAxis)
+function renderGraph(hash)
 {
+	var xAxis = [];
+	var yAxis = [];
+	for (var i = 0; i < historicalData.length; i++)
+	{
+		var year = new Date(1970, 0, 1);
+		year.setSeconds(historicalData[i].daily.data[0].time);
+		xAxis.push(year.getFullYear());
+
+		switch (hash) {
+			case 0: yAxis.push(Math.round(historicalData[i].daily.data[0].temperatureMax));
+				break;
+			case 1: yAxis.push(Math.round(historicalData[i].daily.data[0].temperatureMin));
+				break;
+			case 2: yAxis.push(Math.round(historicalData[i].daily.data[0].windSpeed));
+				break;
+			case 3: yAxis.push(historicalData[i].daily.data[0].precipIntensity);
+				break;
+			default: break;
+		}
+	}
+
+
     var data = [
         {
             x: xAxis,
@@ -182,17 +217,69 @@ function renderGraph(xAxis, yAxis)
         }
     ]
 
+	var arr = getGraphTitles(hash);
+
     var layout = {
-        title: 'Historical Temperatures On This Day',
+        title: arr[0],
         xaxis: {
             title: 'Year',
         },
         yaxis: {
-            title: 'Degrees (F)'
+            title: arr[1],
 		},
 		paper_bgcolor: 'rgba(0, 0, 0, 0)',
 		plot_bgcolor: 'rgba(0, 0, 0, 0)'
     };
     Plotly.newPlot('graph', data, layout);
     return;
+}
+
+//Gets the title for the graph based on the hash value passed in.
+function getGraphTitles(hash)
+{
+	var arr = [];
+	switch (hash) {
+		case 0: arr.push('Maximum Temperature Past 5 Years');
+			arr.push('Degrees (F)');
+			break;
+
+		case 1: arr.push('Minimum Temperature Past 5 Years');
+			arr.push('Degrees (F)');
+			break;
+
+		case 2: arr.push('Wind Speed Past 5 Years');
+			arr.push('Intensity');
+			break;
+
+		case 3: arr.push('Precipiation Intensity Past 5 Years');
+			arr.push('Intensity');
+			break;
+
+		default: ['5 Year Historical Data', 'Degrees (F)', 'maxTempGraph']
+			break;;
+	}
+	return arr;
+}
+
+
+
+function moreInfo()
+{
+	if (darkSky)
+	{
+		var msg = "";
+		msg = msg.concat("Maximum Temperature: " + darkSky.daily.data[0].temperatureMax + "\n");
+		msg = msg.concat("Minimum Temperature: " + darkSky.daily.data[0].temperatureMin + "\n");
+		msg = msg.concat("Wind Speed: " + darkSky.daily.data[0].windSpeed + "\n");
+		msg = msg.concat("Precipitation: " + darkSky.daily.data[0].precipIntensity + "\n");
+		msg = msg.concat("Humidity: " + darkSky.daily.data[0].humidity + "\n");
+		msg = msg.concat("Pressure: " + darkSky.daily.data[0].pressure + "\n");
+		msg = msg.concat("Ozone: " + darkSky.daily.data[0].ozone + "\n");
+		msg = msg.concat("Visibility: " + darkSky.daily.data[0].visibility + "\n");
+		alert(msg);
+	}
+	else
+	{
+		alert("Please enter a location"); ''
+	}
 }

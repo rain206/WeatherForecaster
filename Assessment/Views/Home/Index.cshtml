@@ -5,67 +5,70 @@
 
 <div id="map" hidden></div>
 
-<div id="main" style="width: 100%; margin-top: 1%">
+<div id="search" style="width: 100%; margin-top: 1%">
 	<!--<div id="map" style="height: 600px"></div>
 	<span style="width: 5.5%">Location: </span>-->
 	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter a location" />
 	<button type="button" class="btn btn-default" onclick="queryWeather()">Get Weather</button>
-	<div class="row">
-		<h2 id="weather-location" class="text-center"></h2>
-	</div>
+</div>
+
+<div class="row">
+    <h2 id="weather-location" class="text-center"></h2>
 </div>
 
 <div class="jumbotron" id="info" hidden>
-	<div class="col-md-6">
-		<div id="graph"></div>
-	</div>
-	<div class="col-md-3" style="margin-top: 7%">
-		<div class="row">
-			<h2 id="summary" class="text-center">Summary: --</h2>
-		</div>
-		<div class="row">
-			<h2 id="weather-high" class="text-center">High: --</h2>
-		</div>
-		<div class="row">
-			<h2 id="weather-low" class="text-center">Low: --</h2>
-		</div>
-	</div>
-	<div class="col-md-3" style="margin-top: 13%; text-align: center">
-		<p id="weather-current" class="text-center" style="font-size: 92px">--</p>
-	</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="graph"></div>
+            <a href="javascript:void(0)" id="maxTempGraph" onclick="renderGraph(0)">Max Temperature</a>
+            <a href="javascript:void(0)" id="minTempGraph" onclick="renderGraph(1)">Min. Temperature</a>
+            <a href="javascript:void(0)" id="windGraph" onclick="renderGraph(2)">Wind Speed</a>
+            <a href="javascript:void(0)" id="precipGraph" onclick="renderGraph(3)">Precipitation</a>
+        </div>
+        <div class="col-md-3 text-center" style="margin-top: 12%">
+            <h1 id="weather-current" style="font-size: 92px">--</h1>
+            <h2 id="weather-high">High: --</h2>
+            <h2 id="weather-low">Low: --</h2>
+        </div>
+        <div class="col-md-3 text-center" style="margin-top: 15%; text-align: center">
+            <i class="fa fa-sun-o fa-5x" id="iconToday" aria-hidden="true"></i>
+            <h2 id="summary">Summary: --</h2>
+            <div class="row text-center"><a href="javascript:void(0)" onclick="moreInfo()">More Info</a></div>
+        </div>
+    </div>
 </div>
 
-<div id="forecast" hidden>
-	<div class="col-md-2 text-center" id="firstForecast">
+<div class="text-center" id="forecast" hidden>
+	<div class="col-md-2">
 		<p id="day1"></p>
 		<p id="day1-high">High: --</p>
 		<p id="day1-low">Low: --</p>
 	</div>
-	<div class="col-md-2 text-center">
-		<p id="day2"></p>
-		<p id="day2-high">High: --</p>
-		<p id="day2-low">Low: --</p>
-	</div>
-	<div class="col-md-2 text-center">
-		<p id="day3"></p>
-		<p id="day3-high">High: --</p>
-		<p id="day3-low">Low: --</p>
-	</div>
-	<div class="col-md-2 text-center">
-		<p id="day4"></p>
-		<p id="day4-high">High: --</p>
-		<p id="day4-low">Low: --</p>
-	</div>
-	<div class="col-md-2 text-center">
-		<p id="day5"></p>
-		<p id="day5-high">High: --</p>
-		<p id="day5-low">Low: --</p>
-	</div>
-	<div class="col-md-2 text-center">
-		<p id="day6"></p>
-		<p id="day6-high">High: --</p>
-		<p id="day6-low">Low: --</p>
-	</div>
+    <div class="col-md-2">
+        <p id="day2"></p>
+        <p id="day2-high">High: --</p>
+        <p id="day2-low">Low: --</p>
+    </div>
+    <div class="col-md-2">
+        <p id="day3"></p>
+        <p id="day3-high">High: --</p>
+        <p id="day3-low">Low: --</p>
+    </div>
+    <div class="col-md-2">
+        <p id="day4"></p>
+        <p id="day4-high">High: --</p>
+        <p id="day4-low">Low: --</p>
+    </div>
+    <div class="col-md-2">
+        <p id="day5"></p>
+        <p id="day5-high">High: --</p>
+        <p id="day5-low">Low: --</p>
+    </div>
+    <div class="col-md-2">
+        <p id="day6"></p>
+        <p id="day6-high">High: --</p>
+        <p id="day6-low">Low: --</p>
+    </div>
 </div>
 
 @section Scripts {

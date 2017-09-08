@@ -54,8 +54,13 @@ input {
 .dygraph-legend { text-align: right; }
 
 #info {
-	background-color: rgba(152, 163, 178, 0.3);
-	height: 550px;
+    background-color: rgba(152, 163, 178, 0.3);
+    color: rgb(21, 25, 31);
+    height: 550px;
+}
+
+#info .col-md-6 a {
+    margin-right: 5%;
 }
 
 #forecast {
@@ -68,14 +73,10 @@ input {
     text-transform: uppercase;
 }
 
-#weather-current {
-    color: rgb(21, 25, 31);
-}
-
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 750px) {
     #info {
-        height: 500px;
+        height: 550px;
     }
 
     input {
