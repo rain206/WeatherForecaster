@@ -6,8 +6,7 @@
 <div id="map" hidden></div>
 
 <div id="search" style="width: 100%; margin-top: 1%">
-	<input type="text" id="autocomplete" style="width: 90%" placeholder="Enter a location" />
-	<button type="button" class="btn btn-default" onclick="queryWeather()">Get Weather</button>
+	<input type="text" id="autocomplete" style="width: 100%" placeholder="Enter a location" />
 </div>
 
 <div class="row">
@@ -76,33 +75,39 @@
 			async defer></script>
 
 	<script type="text/javascript">
-        function queryWeather() {
+        //Initializes the google maps search box
+        function initMap() {
+            searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'));
 
-            if (!newQuery) {
-                alert("Help me reduce the api call count by not spamming the Get Weather button =)");
-                return;
-            }
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
 
-			if (@User.Identity.IsAuthenticated.ToString().ToLower())
-            {
-                var query = $("#autocomplete").val();
-                $.ajax({
-                    type: 'POST',
-                    cache: false,
-                    url: '@Url.Action("CreateQuery", "History")',
-                    data: { query: query, id: '@UserManager.GetUserId(User)' },
-                    success: function (response) {
-                        getWeather();
-                    }
-                })
-                .error(function (jqXHR, textStatus, errorThrown) {
-                    alert("Server error. Please try again later.");
-                })
-            }
-            else
-            {
-                getWeather();
-            }
-		}
+                if (places.length == 0) return;
+
+                if (@User.Identity.IsAuthenticated.ToString().ToLower())
+                {
+                    var query = $("#autocomplete").val();
+                    var date = new Date();
+                    $.ajax({
+                        type: 'POST',
+                        cache: false,
+                        url: '@Url.Action("CreateQuery", "History")',
+                        data: { query: query, date: date.toISOString(), id: '@UserManager.GetUserId(User)' },
+                        success: function (response) {
+                            getWeather();
+                        }
+                    })
+                    .error(function (jqXHR, textStatus, errorThrown) {
+                        alert("Server error. Please try again later.");
+                    })
+                }
+                else
+                {
+                    getWeather();
+                }
+            });
+        }
 	</script>
 }

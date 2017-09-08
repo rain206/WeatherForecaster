@@ -50,12 +50,12 @@ namespace Assessment.Controllers
         /// <param name="model"></param>
         [HttpPost]
         [Authorize]
-        public async Task CreateQuery(string query, string id)
+        public async Task CreateQuery(string query, DateTime date, string id)
 		{
 			var model = new QueryViewModel();
 			model.Query = query;
 			model.UserId = id;
-            model.Date = DateTime.Now;
+            model.Date = date;
 			_context.Add(model);
 			await _context.SaveChangesAsync();
 		}

@@ -1,4 +1,4 @@
-﻿var searchBox, city, changed = 0, newQuery = false, darkSky, darkSkyUrl;
+﻿var searchBox, city, changed = 0, darkSky, darkSkyUrl;
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var historicalData = [];
 
@@ -22,23 +22,6 @@ function getLocation() {
 	});
 }
 
-//Initializes the google maps search box
-function initMap() {
-	searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'));
-
-	// Listen for the event fired when the user selects a prediction and retrieve
-	// more details for that place.
-	searchBox.addListener('places_changed', function () {
-		var places = searchBox.getPlaces();
-
-		if (places.length == 0) {
-			return;
-		}
-		newQuery = true;
-		getWeather();
-	});
-}
-
 //Gets the city, and weather forecast for the location entered into the search box
 function getWeather() {
 	if (searchBox.getPlaces().length > 0)
@@ -51,7 +34,6 @@ function getWeather() {
 	else {
 		alert("Could not retrieve location. Please enter a new location");
 	}
-	newQuery = false;
 }
 
 //Gets the city location (latitude, longitude, name, etc.)
