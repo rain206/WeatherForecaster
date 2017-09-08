@@ -9,6 +9,8 @@
 	<environment names="Development">
 		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 		<link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/weather-icons.css" />
+        <link rel="stylesheet" href="~/css/weather-icons-wind.css" />
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	</environment>
 	<environment names="Staging,Production">
@@ -17,6 +19,8 @@
 			  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
 		<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
         <link  rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/weather-icons.css" />
+        <link rel="stylesheet" href="~/css/weather-icons-wind.css" />
 	</environment>
 	@Html.Raw(JavaScriptSnippet.FullScript)
 </head>

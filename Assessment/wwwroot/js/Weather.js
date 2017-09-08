@@ -73,7 +73,7 @@ function getCity(latLon) {
 
 //Gets the forecast for the location and changes the HTML accordingly.
 function getForecast(latLon) {
-	darkSkyUrl = "https://api.darksky.net/forecast/f6490d4ee8ea6131360e34e7570255d1/" + latLon;
+	darkSkyUrl = "https://api.darksky.net/forecast/25da0162a3bbb222ed3f144eaabade8d/" + latLon;
 	$.ajax({
 		format: "jsonp",
 		dataType: "jsonp",
@@ -86,7 +86,7 @@ function getForecast(latLon) {
 			$("#weather-high").html("High: " + Math.round(json.daily.data[0].temperatureMax) + "°");
 			$("#weather-low").html("Low: " + Math.round(json.daily.data[0].temperatureMin) + "°");
 			$("#summary").html(json.daily.data[0].summary);
-			$("#iconToday").replaceWith(getWeatherIcon(json.daily.data[0].icon).replace("2x", "5x"));
+			$("#iconToday").replaceWith(getWeatherIcon(json.hourly.data[0].icon).replace("32px", "92px"));
 
 			for (var i = 1; i < 7 && json.daily.data.length; i++)
 			{
@@ -121,21 +121,21 @@ function getWeatherIcon(icon)
 {
 	if (icon.localeCompare('clear-night') == 0)
 	{
-		return '<i class=fa fa-star fa-2x aria-hidden="true"></i>';
+		return '<i class="wi wi-night-clear" style="font-size: 32px"></i>';
 	}
 	else if (icon.localeCompare('rain') == 0)
 	{
-		return '<i class="fa fa-shower fa-2x" aria-hidden="true"></i>'
+		return '<i class="wi wi-rain" style="font-size: 32px"></i>';
 	}
 	else if (icon.localeCompare('snow') == 0 || icon.localeCompare('sleet') == 0)
 	{
-		return '<i class="fa fa-snowflake-o fa-2x" aria-hidden="true"></i>'
+		return '<i class="wi wi-snow" style="font-size: 32px"></i>';
 	}
 	else if (icon.localeCompare('fog') == 0 || icon.localeCompare('cloudy') == 0 || icon.localeCompare('partly-cloudy-day') == 0)
 	{
-		return '<i class="fa fa-cloud fa-2x" aria-hidden="true"></i>'
+		return '<i class="wi wi-day-fog" style="font-size: 32px"></i>';
 	}
-	return '<i class="fa fa-sun-o fa-2x" aria-hidden="true"></i>'
+	return '<i class="wi wi-day-sunny" style="font-size: 32px"></i>'
 }
 
 //Recursively makes ajax calls to the DarkSky API to gather weather information for the past 5 years from today
@@ -154,27 +154,6 @@ function getPastData(url, yearsBack) {
 		url: query,
 		success: function (json) {
 			historicalData.push(json);
-
-			/*
-			var record = new Date(1970, 0, 1);
-			record.setSeconds(json.daily.data[0].time);
-
-			xAxis.push(record.getFullYear());
-
-			switch (hash)
-			{
-				case 0: yAxis.push(Math.round(json.daily.data[0].temperatureMax));
-						break;
-				case 1: yAxis.push(Math.round(json.daily.data[0].temperatureMin));
-						break;
-				case 2: yAxis.push(Math.round(json.daily.data[0].windSpeed));
-						break;
-				case 3: yAxis.push(json.daily.data[0].precipIntensity);
-						break;
-				default: break;
-			}
-			*/
-
             getPastData(url, yearsBack - 1);
 		}
 	})
@@ -251,7 +230,7 @@ function getGraphTitles(hash)
 			arr.push('Intensity');
 			break;
 
-		case 3: arr.push('Precipiation Intensity Past 5 Years');
+		case 3: arr.push('Precipitation Intensity Past 5 Years');
 			arr.push('Intensity');
 			break;
 

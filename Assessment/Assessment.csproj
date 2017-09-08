@@ -14,7 +14,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\Assessment20170907122827 - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\weather-icons-wind.css" />
+    <Content Include="wwwroot\css\weather-icons-wind.min.css" />
+    <Content Include="wwwroot\css\weather-icons.css" />
+    <Content Include="wwwroot\css\weather-icons.min.css" />
     <Content Include="wwwroot\font\weathericons-regular-webfont.eot" />
+    <Content Include="wwwroot\font\weathericons-regular-webfont.svg" />
+    <Content Include="wwwroot\font\weathericons-regular-webfont.ttf" />
+    <Content Include="wwwroot\font\weathericons-regular-webfont.woff" />
+    <Content Include="wwwroot\font\weathericons-regular-webfont.woff2" />
     <Content Include="wwwroot\js\Weather.js" />
   </ItemGroup>
   <ItemGroup>
