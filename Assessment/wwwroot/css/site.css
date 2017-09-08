@@ -42,14 +42,6 @@ textarea {
 	width: 100%;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-	/* Hide captions */
-	.carousel-caption {
-		display: none;
-	}
-}
-
 #autocomplete {
 	width: 100%;
 	height: 25px;
@@ -78,4 +70,27 @@ input {
 
 #weather-current {
     color: rgb(21, 25, 31);
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 750px) {
+    #info {
+        height: 500px;
+    }
+
+    input {
+        max-width: 80%
+    }
+
+    #forecast{
+        height: 750px;
+    }
+
+    #forecast .col-md-2 {
+        margin-top: 2%;
+    }
+
+    #info .col-md-6 {
+        display: none
+    }
 }

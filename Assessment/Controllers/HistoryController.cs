@@ -13,6 +13,9 @@ namespace Assessment.Controllers
 {
     public class HistoryController : Controller
     {
+        /// <summary>
+        /// Database context
+        /// </summary>
         private readonly HistoryContext _context;
 
         public HistoryController(HistoryContext context)

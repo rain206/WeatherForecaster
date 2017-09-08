@@ -1,13 +1,11 @@
-﻿var searchBox;
+﻿var searchBox, city, changed = 0, newQuery = false;
 var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-var city;
-var changed = 0;
-var newQuery = false;
 
 $(document.ready).ready(function () {
 	getLocation();
 })
 
+//Gets the location of the user based on their IP address. 
 function getLocation() {
 	var location;
 	$.ajax({
@@ -23,7 +21,7 @@ function getLocation() {
 	});
 }
 
-
+//Initializes the google maps search box
 function initMap() {
 	searchBox = new google.maps.places.SearchBox(document.getElementById('autocomplete'));
 
@@ -39,6 +37,7 @@ function initMap() {
 	});
 }
 
+//Gets the city, and weather forecast for the location entered into the search box
 function getWeather() {
 	if (searchBox.getPlaces().length > 0)
 	{
@@ -53,6 +52,7 @@ function getWeather() {
 	newQuery = false;
 }
 
+//Gets the city location (latitude, longitude, name, etc.)
 function getCity(latLon) {
 	var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon + "&sensor=true";
 	url = url.replace(/\s/g, "");
@@ -70,6 +70,7 @@ function getCity(latLon) {
 	})
 }
 
+//Gets the forecast for the location and changes the HTML accordingly.
 function getForecast(latLon) {
 	var url = "https://api.darksky.net/forecast/f6490d4ee8ea6131360e34e7570255d1/" + latLon;
 	$.ajax({
@@ -112,6 +113,7 @@ function getForecast(latLon) {
 	})
 }
 
+//Returns an HTML string to show a weather icon depending "icon". A sun will be displayed by default.
 function getWeatherIcon(icon)
 {
 	if (icon.localeCompare('clear-night') == 0)
@@ -133,12 +135,14 @@ function getWeatherIcon(icon)
 	return '<i class="fa fa-sun-o fa-2x" aria-hidden="true"></i>'
 }
 
+//Initializes the variables for the graph.
 function historicalGraph(url) {
     var xAxis = [];
     var yAxis = [];
     getData(url, 4, xAxis, yAxis);
 }
 
+//Recursively makes ajax calls to the DarkSky API to gather weather information for the past 5 years from today
 function getData(url, i, xAxis, yAxis) {
     if (i < 0) {
         renderGraph(xAxis, yAxis);
@@ -166,6 +170,7 @@ function getData(url, i, xAxis, yAxis) {
 	})
 }
 
+//Renders a bar graph onto the DOM using Plotly
 function renderGraph(xAxis, yAxis)
 {
     var data = [
