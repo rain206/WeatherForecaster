@@ -81,7 +81,7 @@ input {
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 750px) {
     #info {
-        height: 550px;
+        height: 580px;
     }
 
     input {

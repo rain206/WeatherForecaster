@@ -35,6 +35,7 @@ function initMap() {
 			return;
 		}
 		newQuery = true;
+		getWeather();
 	});
 }
 
@@ -218,20 +219,20 @@ function getGraphTitles(hash)
 {
 	var arr = [];
 	switch (hash) {
-		case 0: arr.push('Maximum Temperature Past 5 Years');
+		case 0: arr.push('Historical Maximum Temperatures On This Day');
 			arr.push('Degrees (F)');
 			break;
 
-		case 1: arr.push('Minimum Temperature Past 5 Years');
+		case 1: arr.push('Historical Minimum Temperatures On This Day');
 			arr.push('Degrees (F)');
 			break;
 
-		case 2: arr.push('Wind Speed Past 5 Years');
-			arr.push('Intensity');
+		case 2: arr.push('Historical Wind Speeds On This Day');
+			arr.push('Miles Per Hour');
 			break;
 
-		case 3: arr.push('Precipitation Intensity Past 5 Years');
-			arr.push('Intensity');
+		case 3: arr.push('Historical Precipitation Intensity On This Day');
+			arr.push('Millimeters Per Hour');
 			break;
 
 		default: ['5 Year Historical Data', 'Degrees (F)', 'maxTempGraph']
@@ -241,7 +242,7 @@ function getGraphTitles(hash)
 }
 
 
-
+//Sends a pop-up with more information about the weather for the day
 function moreInfo()
 {
 	if (darkSky)
